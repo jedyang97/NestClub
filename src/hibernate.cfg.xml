@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!--数据库URL -->
+		<property name="connection.url">
+			jdbc:mysql://jed0610.gotoftp3.com:3306/jed0610
+		</property>
+		<!--数据库用户 -->
+		<property name="connection.username">jed0610</property>
+		<!--数据库用户密码 -->
+		<property name="connection.password">Yangjianing0610</property>
+		<!--数据库JDBC驱动 -->
+		<property name="connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<!--每个数据库都有其对应的Dialect以匹配其平台特性 -->
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<!--指定当前session范围和上下文 -->
+		<property name="current_session_context_class">thread</property>
+		<!--是否将运行期生成的SQL输出到日志以供调试 -->
+		<property name="show_sql">true</property>
+		<!--是否格式化SQL -->
+		<property name="format_sql">true</property>
+		<!--C3P0配置 -->
+        <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.timeout">5000</property>
+        <property name="hibernate.c3p0.max_statements">100</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <property name="hibernate.c3p0.acquire_increment">2</property>
+        <property name="hibernate.c3p0.validate">false</property>
+
+		<mapping resource="cn/cornellclub/socialization/entity/Event.hbm.xml"/>
+		<mapping resource="cn/cornellclub/socialization/entity/Reservation.hbm.xml"/>
+		<mapping resource="cn/cornellclub/socialization/entity/Administrator.hbm.xml"/>
+		<mapping resource="cn/cornellclub/socialization/entity/Item.hbm.xml"/>
+		<mapping resource="cn/cornellclub/socialization/entity/User.hbm.xml"/>
+		<mapping resource="cn/cornellclub/socialization/entity/User_option.hbm.xml"/>
+	</session-factory>
+
+
+</hibernate-configuration>

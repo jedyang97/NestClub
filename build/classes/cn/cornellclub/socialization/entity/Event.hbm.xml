@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="cn.cornellclub.socialization.entity.Event" table="event" dynamic-update="true">
+        <id name="name" column="event_name" type="java.lang.String">
+            <generator class="assigned"/>
+        </id>
+        <list name="items" table="item" lazy="false">
+        	<key>
+        		<column name="event_name" not-null="true" />
+        	</key>
+        	<list-index>
+        		<column name="item_index" />
+        	</list-index>
+        	<element type="java.lang.String">
+        		<column name="item_name" />
+        	</element>
+      	</list>
+        <property name="address" type="java.lang.String" column="event_address"/>
+        <property name="date" type="java.lang.String" column="event_date" />
+        <property name="time" type="java.lang.String" column="event_time" />
+        <property name="dressCode" type="java.lang.String" column="event_dresscode" />
+        <property name="description" type="java.lang.String" column="event_description" />
+        <property name="poster" type="java.lang.String" column="event_poster" />
+        <property name="status" type="java.lang.String" column="event_status" />
+        <property name="yooPayEventName" type="java.lang.String" column="event_yoopayeventname" />
+    </class>
+</hibernate-mapping>

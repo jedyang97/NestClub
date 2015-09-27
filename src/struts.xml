@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="myAuthorization"
+				class="cn.cornellclub.socialization.interceptor.AuthorizationInterceptor">
+			</interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="myAuthorization" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 定义默认拦截器 -->
+		<default-interceptor-ref name="defaultStack" />
+
+		<global-results>
+			<result name="login">/AdministratorSignIn.jsp</result>
+		</global-results>
+
+		<action name="Reserve"
+			class="cn.cornellclub.socialization.action.ReserveAction">
+			<result name="SUCCESS">/ReserveResult.jsp</result>
+		</action>
+
+		<action name="ReserveInit"
+			class="cn.cornellclub.socialization.action.ReserveInitAction">
+			<result name="SUCCESS">/Reserve.jsp</result>
+			<result name="CLOSED">/EventClosed.jsp</result>
+		</action>
+
+		<action name="Organize"
+			class="cn.cornellclub.socialization.action.OrganizeAction">
+			<result name="SUCCESS">/OrganizeResult.jsp</result>
+		</action>
+
+		<action name="OrganizeInit"
+			class="cn.cornellclub.socialization.action.OrganizeInitAction">
+			<interceptor-ref name="myStack" />
+			<result name="SUCCESS">/Organize.jsp</result>
+		</action>
+
+		<action name="AdministratorSignIn"
+			class="cn.cornellclub.socialization.action.AdministratorSignInAction">
+			<result type="redirectAction" name="SUCCESS">AdminInit</result>
+		</action>
+
+		<action name="AdminInit"
+			class="cn.cornellclub.socialization.action.AdminInitAction">
+			<interceptor-ref name="myStack" />
+			<result name="SUCCESS">/Administrator.jsp</result>
+		</action>
+
+		<action name="ViewEvent"
+			class="cn.cornellclub.socialization.action.ViewEventAction">
+			<result name="SUCCESS">/ViewEvent.jsp</result>
+		</action>
+
+		<action name="EventListInit"
+			class="cn.cornellclub.socialization.action.EventListInitAction">
+			<result name="SUCCESS">/EventList.jsp</result>
+		</action>
+
+		<action name="PayInit"
+			class="cn.cornellclub.socialization.action.PayInitAction">
+			<result name="SUCCESS">/Pay.jsp</result>
+		</action>
+
+		<action name="ChangeLocale"
+			class="cn.cornellclub.socialization.action.ChangeLocaleAction">
+			<result name="SUCCESS">/index.jsp</result>
+		</action>
+
+		<action name="EditEventInit"
+			class="cn.cornellclub.socialization.action.EditEventInitAction">
+			<result name="SUCCESS">/EditEvent.jsp</result>
+		</action>
+
+		<action name="RemoveEvent"
+			class="cn.cornellclub.socialization.action.RemoveEventAction">
+			<result name="SUCCESS" type="redirectAction">AdminInit</result>
+		</action>
+
+		<action name="CloseOpenEvent"
+			class="cn.cornellclub.socialization.action.CloseOpenEventAction">
+			<result name="SUCCESS" type="redirectAction">AdminInit</result>
+		</action>
+
+		<action name="EditEvent"
+			class="cn.cornellclub.socialization.action.EditEventAction">
+			<result name="SUCCESS">/OrganizeResult.jsp</result>
+		</action>
+
+		<action name="ExportToExcel"
+			class="cn.cornellclub.socialization.action.ExportToExcelAction">
+			<result name="SUCCESS" type="stream">
+				<!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->
+				<param name="contentType">application/vnd.ms-excel</param>
+				<!-- 返回流 excelStream为action中的流变量名称 -->
+				<param name="inputName">excelStream</param>
+				<!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。 fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量 -->
+				<param name="contentDisposition">
+					attachment;filename = ${excelFileName}
+				</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+
+		<action name="UserSignUp"
+			class="cn.cornellclub.socialization.action.UserSignUpAction">
+			<result name="SUCCESS">/UserSignUpResult.jsp</result>
+		</action>
+
+		<action name="lac">
+			<result name="success">/UserSignUp.jsp</result>
+		</action>
+
+		<action name="UserSignUpInit"
+			class="cn.cornellclub.socialization.action.UserSignUpInitAction">
+			<result name="SUCCESS">/UserSignUp.jsp</result>
+		</action>
+		
+		<action name="MailingListToExcel"
+			class="cn.cornellclub.socialization.action.MailingListToExcelAction">
+			<result name="SUCCESS" type="stream">
+				<!-- 下载文件的类型，如果你不知道是什么格式，可以去 tomcat\conf\web.xml下找 -->
+				<param name="contentType">application/vnd.ms-excel</param>
+				<!-- 返回流 excelStream为action中的流变量名称 -->
+				<param name="inputName">excelStream</param>
+				<!-- attachment 这个位置的参数挺特殊的，可以设置成下载时，是否出现个下载提示框，或者直接下载之类的。 fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量 -->
+				<param name="contentDisposition">
+					attachment;filename = ${excelFileName}
+				</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+
+	</package>
+
+
+</struts>

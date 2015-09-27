@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="cn.cornellclub.socialization.entity.Reservation" table="reservation" dynamic-update="true">
+        <id name="code" column="reservation_code" type="java.lang.Integer">
+            <generator class="assigned"/>
+        </id>
+        <property name="datetime" type="java.util.Date" column="reservation_datetime" />
+        <property name="firstName" type="java.lang.String" column="reservation_firstname"/>
+        <property name="lastName" type="java.lang.String" column="reservation_lastname"/>
+        <property name="eventName" type="java.lang.String" column="event_name" />
+        <property name="phoneNumber" type="java.lang.String" column="reservation_phonenumber" />
+        <property name="weChatAccount" type="java.lang.String" column="reservation_wechataccount" />
+        <property name="email" type="java.lang.String" column="reservation_email" />
+        <property name="school" type="java.lang.String" column="reservation_school" />
+        <property name="company" type="java.lang.String" column="reservation_company" />
+        <property name="status" type="java.lang.String" column="reservation_status" />
+        <property name="partner1" type="java.lang.String" column="reservation_partner1" />
+        <property name="partner2" type="java.lang.String" column="reservation_partner2" />
+        <property name="age" type="java.lang.Integer" column="reservation_age" />
+        <property name="job" type="java.lang.String" column="reservation_job" />
+        <property name="gender" type="java.lang.String" column="reservation_gender" />
+        <property name="invitationWeChatAccount" type="java.lang.String" column="reservation_invitationWeChatAccount" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="cn.cornellclub.socialization.entity.User" table="user" dynamic-update="true">
+        <id name="email" column="user_email" type="java.lang.String">
+            <generator class="assigned"/>
+        </id>
+        <list name="user_options" table="user_option" lazy="false">
+        	<key>
+        		<column name="user_email" not-null="true" />
+        	</key>
+        	<list-index>
+        		<column name="user_option_index" />
+        	</list-index>
+        	<element type="java.lang.String">
+        		<column name="user_option_name" />
+        	</element>
+      	</list>
+        <property name="password" type="java.lang.String" column="user_password" />
+        <property name="firstName" type="java.lang.String" column="user_firstname"/>
+        <property name="lastName" type="java.lang.String" column="user_lastname"/>
+        <property name="phoneNumber" type="java.lang.String" column="user_phonenumber" />
+        <property name="weChatAccount" type="java.lang.String" column="user_wechataccount" />
+        <property name="school" type="java.lang.String" column="user_school" />
+        <property name="graduationYear" type="java.lang.String" column="user_graduationyear" />
+        <property name="gender" type="java.lang.String" column="user_gender" />
+    </class>
+</hibernate-mapping>
